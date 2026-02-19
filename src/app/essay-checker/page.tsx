@@ -124,8 +124,14 @@ export default function EssayCheckerPage() {
           <h2 className="text-2xl font-headline font-semibold">Review Results</h2>
           <Card>
             <CardHeader>
-                <CardTitle>Overall Score: {review.overallScore}/10</CardTitle>
-                <Progress value={review.overallScore * 10} className="w-full max-w-sm mt-2" />
+                <CardTitle>Overall Score</CardTitle>
+                <div className="rounded-lg bg-muted p-4 my-2">
+                    <div className="flex items-baseline justify-center gap-2">
+                        <span className="text-5xl font-bold tracking-tighter">{Math.round(review.overallScore * 10)}</span>
+                        <span className="text-xl text-muted-foreground">%</span>
+                    </div>
+                </div>
+                <Progress value={review.overallScore * 10} className="w-full" />
             </CardHeader>
             <CardContent>
                 <h3 className="font-semibold mb-2">Suggestions for Improvement:</h3>
