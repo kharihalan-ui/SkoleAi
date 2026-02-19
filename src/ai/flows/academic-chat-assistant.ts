@@ -17,9 +17,9 @@ export type AcademicChatAssistantInput = z.infer<
   typeof AcademicChatAssistantInputSchema
 >;
 
-const AcademicChatAssistantOutputSchema = z
-  .string()
-  .describe('The AI\'s answer to the academic question.');
+const AcademicChatAssistantOutputSchema = z.object({
+    answer: z.string().describe("The AI's answer to the academic question."),
+});
 export type AcademicChatAssistantOutput = z.infer<
   typeof AcademicChatAssistantOutputSchema
 >;

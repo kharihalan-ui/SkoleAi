@@ -53,7 +53,7 @@ export default function ChatPage() {
 
     try {
       const assistantResponse = await academicChatAssistant({ message: values.message });
-      const assistantMessage: Message = { role: 'assistant', content: assistantResponse };
+      const assistantMessage: Message = { role: 'assistant', content: assistantResponse.answer };
       setMessages((prev) => [...prev, assistantMessage]);
     } catch (error) {
       console.error(error);
