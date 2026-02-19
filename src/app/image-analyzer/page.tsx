@@ -10,8 +10,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
-import { Loader2, Wand2 } from 'lucide-react';
-import NextImage from 'next/image';
+import { Loader2, Wand2, Upload, File, X } from 'lucide-react';
 
 const formSchema = z.object({
   prompt: z.string().min(3, {
@@ -22,8 +21,8 @@ const formSchema = z.object({
 export default function ImageAnalyzerPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [result, setResult] = useState<ImageContentAnalyzerOutput | null>(null);
-  const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [imageData, setImageData] = useState<string | null>(null);
+  const [fileName, setFileName] = useState<string | null>(null);
   const { toast } = useToast();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -36,14 +35,24 @@ export default function ImageAnalyzerPage() {
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      setFileName(file.name);
       const reader = new FileReader();
       reader.onloadend = () => {
-        setImagePreview(reader.result as string);
         setImageData(reader.result as string);
       };
       reader.readAsDataURL(file);
     }
   };
+  
+  const removeImage = () => {
+    setImageData(null);
+    setFileName(null);
+    const fileInput = document.getElementById('image-upload') as HTMLInputElement;
+    if (fileInput) {
+      fileInput.value = '';
+    }
+  }
+
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     if (!imageData) {
@@ -90,13 +99,28 @@ export default function ImageAnalyzerPage() {
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <FormLabel htmlFor="image-upload">Upload Image</FormLabel>
-                   <Input id="image-upload" type="file" accept="image/*" onChange={handleImageChange} className="pt-2"/>
-                  {imagePreview && (
-                    <div className="mt-4 border rounded-lg p-2 aspect-video relative">
-                      <NextImage src={imagePreview} alt="Image preview" fill objectFit="contain" />
-                    </div>
-                  )}
+                  <FormLabel>Upload Image</FormLabel>
+                   {!imageData ? (
+                     <div className="relative">
+                        <label htmlFor="image-upload" className="cursor-pointer relative flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-lg hover:bg-muted transition-colors">
+                          <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                            <Upload className="w-8 h-8 mb-2 text-muted-foreground" />
+                            <p className="mb-2 text-sm text-muted-foreground"><span className="font-semibold">Click to upload</span> or drag and drop</p>
+                          </div>
+                          <Input id="image-upload" type="file" accept="image/*" onChange={handleImageChange} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"/>
+                        </label>
+                      </div>
+                   ) : (
+                     <div className="flex items-center justify-between p-3 border rounded-lg bg-muted/50">
+                        <div className='flex items-center gap-2'>
+                           <File className="size-5 text-muted-foreground"/>
+                           <span className="text-sm font-medium truncate">{fileName}</span>
+                        </div>
+                        <Button variant="ghost" size="icon" onClick={removeImage} className="size-7">
+                          <X className="size-4"/>
+                        </Button>
+                     </div>
+                   )}
                 </div>
                 <FormField
                   control={form.control}
@@ -113,7 +137,7 @@ export default function ImageAnalyzerPage() {
                 />
               </div>
 
-              <Button type="submit" disabled={isLoading || !imagePreview}>
+              <Button type="submit" disabled={isLoading || !imageData}>
                 {isLoading ? <Loader2 className="animate-spin" /> : <Wand2 />}
                 {isLoading ? 'Analyzing...' : 'Analyze Image'}
               </Button>
@@ -138,7 +162,7 @@ export default function ImageAnalyzerPage() {
 
 
       {result && (
-        <Card>
+        <Card className="animate-in fade-in-50 slide-in-from-bottom-5 duration-500">
           <CardHeader>
             <CardTitle>Analysis Result</CardTitle>
           </CardHeader>
