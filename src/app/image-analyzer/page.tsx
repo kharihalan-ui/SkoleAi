@@ -85,7 +85,7 @@ export default function ImageAnalyzerPage() {
   }
 
   return (
-    <div className="p-4 md:p-8 space-y-8">
+    <div className="p-4 md:p-8 space-y-8 animate-in fade-in-50 duration-500">
       <header>
         <h1 className="text-4xl font-headline font-bold tracking-tight">Image Analyzer</h1>
         <p className="text-muted-foreground mt-2">

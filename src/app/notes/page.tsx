@@ -42,7 +42,7 @@ export default function NotesPage() {
   };
   
   return (
-    <div className="p-4 md:p-8 space-y-8">
+    <div className="p-4 md:p-8 space-y-8 animate-in fade-in-50 duration-500">
       <header>
         <h1 className="text-4xl font-headline font-bold tracking-tight">Smart Notes</h1>
         <p className="text-muted-foreground mt-2">
@@ -96,7 +96,7 @@ export default function NotesPage() {
             ) : (
                 <div className="space-y-4">
                     {notes.map(note => (
-                        <Card key={note.id}>
+                        <Card key={note.id} className="animate-in fade-in-50 duration-500">
                             <CardHeader>
                                 <div className="flex justify-between items-start">
                                     <div>

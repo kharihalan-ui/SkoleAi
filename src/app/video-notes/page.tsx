@@ -50,7 +50,7 @@ export default function VideoNotesPage() {
   }
 
   return (
-    <div className="p-4 md:p-8 space-y-8">
+    <div className="p-4 md:p-8 space-y-8 animate-in fade-in-50 duration-500">
       <header>
         <h1 className="text-4xl font-headline font-bold tracking-tight">Video Study Assistant</h1>
         <p className="text-muted-foreground mt-2">
@@ -103,7 +103,7 @@ export default function VideoNotesPage() {
       )}
 
       {result && (
-        <div className="space-y-6">
+        <div className="space-y-6 animate-in fade-in-50 slide-in-from-bottom-5 duration-500">
           <h2 className="text-2xl font-headline font-semibold">Video Analysis</h2>
           <Card>
             <CardHeader>

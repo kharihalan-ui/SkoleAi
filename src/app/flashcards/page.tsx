@@ -39,12 +39,12 @@ function Flashcard({ term, definition }: FlashcardProps) {
 
   return (
     <div
-      className="[perspective:1000px] w-full aspect-[3/2] cursor-pointer"
+      className="[perspective:1000px] w-full aspect-[3/2] cursor-pointer group"
       onClick={() => setIsFlipped(!isFlipped)}
     >
       <div
         className={cn(
-          'relative h-full w-full rounded-lg shadow-md transition-transform duration-500 [transform-style:preserve-3d]',
+          'relative h-full w-full rounded-lg shadow-md transition-transform duration-500 [transform-style:preserve-3d] group-hover:shadow-primary/20 group-hover:shadow-lg',
           isFlipped && '[transform:rotateY(180deg)]'
         )}
       >
@@ -90,7 +90,7 @@ export default function FlashcardsPage() {
   }
 
   return (
-    <div className="p-4 md:p-8 space-y-8">
+    <div className="p-4 md:p-8 space-y-8 animate-in fade-in-50 duration-500">
       <header>
         <h1 className="text-4xl font-headline font-bold tracking-tight">AI Flashcards</h1>
         <p className="text-muted-foreground mt-2">
@@ -111,7 +111,7 @@ export default function FlashcardsPage() {
                     <FormControl>
                       <Textarea
                         placeholder="Paste your notes, an article, or any study material..."
-                        className="min-h-[200px]"
+                        className="min-h-[200px] text-base"
                         {...field}
                       />
                     </FormControl>
@@ -140,11 +140,13 @@ export default function FlashcardsPage() {
       )}
 
       {result && result.flashcards.length > 0 && (
-        <div className="space-y-6">
+        <div className="space-y-6 animate-in fade-in-50 duration-500">
             <h2 className="text-2xl font-headline font-semibold">Your Flashcards</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 {result.flashcards.map((flashcard, index) => (
-                    <Flashcard key={index} term={flashcard.term} definition={flashcard.definition} />
+                    <div key={index} className='animate-in fade-in-50 slide-in-from-bottom-5' style={{animationDelay: `${index*50}ms`}}>
+                        <Flashcard term={flashcard.term} definition={flashcard.definition} />
+                    </div>
                 ))}
             </div>
         </div>
