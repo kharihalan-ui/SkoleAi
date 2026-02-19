@@ -10,9 +10,9 @@
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
 
-const AcademicChatAssistantInputSchema = z
-  .string()
-  .describe('The academic question to ask the AI.');
+const AcademicChatAssistantInputSchema = z.object({
+  message: z.string().describe('The academic question to ask the AI.'),
+});
 export type AcademicChatAssistantInput = z.infer<
   typeof AcademicChatAssistantInputSchema
 >;
@@ -36,7 +36,7 @@ const academicChatAssistantPrompt = ai.definePrompt({
   output: {schema: AcademicChatAssistantOutputSchema},
   prompt: `You are an AI academic tutor. Your goal is to provide clear, concise, and helpful answers to academic questions. Explain concepts thoroughly, break down complex topics, and offer additional context or examples where appropriate.
 
-Student's Question: {{{input}}}`,
+Student's Question: {{{message}}}`,
 });
 
 const academicChatAssistantFlow = ai.defineFlow(
