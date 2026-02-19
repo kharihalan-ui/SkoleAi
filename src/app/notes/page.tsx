@@ -75,10 +75,10 @@ export default function NotesPage() {
               />
               <div className="flex justify-between items-center">
                  <Button onClick={handleSaveNote}>
-                    <Plus className="mr-2 h-4 w-4"/> Save Note
+                    <Plus/> Save Note
                  </Button>
                  <Button variant="outline" disabled>
-                    <Mic className="mr-2 h-4 w-4"/> Record
+                    <Mic/> Record
                  </Button>
               </div>
             </CardContent>
@@ -106,7 +106,7 @@ export default function NotesPage() {
                                         </CardDescription>
                                     </div>
                                     <Button variant="ghost" size="icon" onClick={() => handleDeleteNote(note.id)}>
-                                        <Trash className="h-4 w-4"/>
+                                        <Trash />
                                     </Button>
                                 </div>
                             </CardHeader>

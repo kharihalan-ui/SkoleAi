@@ -125,7 +125,7 @@ export default function FlashcardsPage() {
                 ) : (
                   <Wand2 />
                 )}
-                <span>{isLoading ? 'Generating...' : 'Generate Flashcards'}</span>
+                {isLoading ? 'Generating...' : 'Generate Flashcards'}
               </Button>
             </form>
           </Form>

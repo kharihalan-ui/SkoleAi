@@ -98,7 +98,7 @@ export default function EssayCheckerPage() {
                 ) : (
                   <Wand2 />
                 )}
-                <span>{isLoading ? 'Reviewing...' : 'Review Essay'}</span>
+                {isLoading ? 'Reviewing...' : 'Review Essay'}
               </Button>
             </form>
           </Form>

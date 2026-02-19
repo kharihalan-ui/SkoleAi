@@ -81,7 +81,7 @@ export default function VideoNotesPage() {
                 ) : (
                   <Wand2 />
                 )}
-                <span>{isLoading ? 'Processing...' : 'Get Notes'}</span>
+                {isLoading ? 'Processing...' : 'Get Notes'}
               </Button>
             </form>
           </Form>

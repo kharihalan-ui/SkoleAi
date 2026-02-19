@@ -115,7 +115,7 @@ export default function ImageAnalyzerPage() {
 
               <Button type="submit" disabled={isLoading || !imagePreview}>
                 {isLoading ? <Loader2 className="animate-spin" /> : <Wand2 />}
-                <span>{isLoading ? 'Analyzing...' : 'Analyze Image'}</span>
+                {isLoading ? 'Analyzing...' : 'Analyze Image'}
               </Button>
             </form>
           </Form>
