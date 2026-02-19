@@ -1,3 +1,40 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "essay-checker",
+      "description": "A person writing an essay at a desk.",
+      "imageUrl": "https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHx3cml0aW5nJTIwZGVza3xlbnwwfHx8fDE3NzE0MzY2MTR8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "writing desk"
+    },
+    {
+      "id": "smart-notes",
+      "description": "A collection of colorful sticky notes on a board.",
+      "imageUrl": "https://images.unsplash.com/photo-1702294469103-d684deb28316?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxzdGlja3klMjBub3Rlc3xlbnwwfHx8fDE3NzE1MTAyNDV8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "sticky notes"
+    },
+    {
+      "id": "ai-flashcards",
+      "description": "A stack of flashcards on a table.",
+      "imageUrl": "https://images.unsplash.com/photo-1602525661773-c2f9406ff452?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxmbGFzaGNhcmRzJTIwc3R1ZHl8ZW58MHx8fHwxNzcxNTEwMjQ1fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "flashcards study"
+    },
+    {
+      "id": "video-notes",
+      "description": "A person watching an educational video on a laptop.",
+      "imageUrl": "https://images.unsplash.com/photo-1648737966326-eb0770cec304?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxsYXB0b3AlMjB2aWRlb3xlbnwwfHx8fDE3NzE1MTAyNDV8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "laptop video"
+    },
+    {
+      "id": "image-analyzer",
+      "description": "A magnifying glass over a diagram.",
+      "imageUrl": "https://images.unsplash.com/photo-1559384960-1a620795202e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxtYWduaWZ5aW5nJTIwZ2xhc3N8ZW58MHx8fHwxNzcxNTEwMjQ1fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "magnifying glass"
+    },
+    {
+      "id": "chat-assistant",
+      "description": "A chat bubble icon on a smartphone screen.",
+      "imageUrl": "https://images.unsplash.com/photo-1625167256638-f47df21d8be7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxjaGF0JTIwYnViYmxlfGVufDB8fHx8MTc3MTUxMDI0NXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "chat bubble"
+    }
+  ]
 }
