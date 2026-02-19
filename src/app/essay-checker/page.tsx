@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -25,6 +25,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { Loader2, Wand2 } from 'lucide-react';
 import { Progress } from '@/components/ui/progress';
+import { cn } from '@/lib/utils';
 
 const formSchema = z.object({
   essayContent: z.string().min(50, {
@@ -35,6 +36,7 @@ const formSchema = z.object({
 export default function EssayCheckerPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [review, setReview] = useState<EssayReviewOutput | null>(null);
+  const [progressValue, setProgressValue] = useState(0);
   const { toast } = useToast();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -43,6 +45,17 @@ export default function EssayCheckerPage() {
       essayContent: '',
     },
   });
+  
+  useEffect(() => {
+    if (review) {
+      const score = Math.round(review.overallScore * 10);
+      const timer = setTimeout(() => setProgressValue(score), 100);
+      return () => clearTimeout(timer);
+    } else {
+      setProgressValue(0);
+    }
+  }, [review]);
+
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
@@ -61,6 +74,18 @@ export default function EssayCheckerPage() {
       setIsLoading(false);
     }
   }
+
+  const getScoreColorClasses = (score: number): { text: string; bg: string; bgMuted: string } => {
+    if (score < 40) {
+      return { text: 'text-destructive', bg: 'bg-destructive', bgMuted: 'bg-destructive/10' };
+    }
+    if (score < 70) {
+      return { text: 'text-chart-3', bg: 'bg-chart-3', bgMuted: 'bg-chart-3/10' };
+    }
+    return { text: 'text-primary', bg: 'bg-primary', bgMuted: 'bg-primary/10' };
+  };
+
+  const scoreColorClasses = review ? getScoreColorClasses(review.overallScore * 10) : { text: '', bg: '', bgMuted: 'bg-muted' };
 
   return (
     <div className="p-4 md:p-8 space-y-8">
@@ -120,18 +145,20 @@ export default function EssayCheckerPage() {
       )}
 
       {review && (
-        <div className="space-y-6">
+        <div className="space-y-6 animate-in fade-in-50 slide-in-from-bottom-5 duration-500">
           <h2 className="text-2xl font-headline font-semibold">Review Results</h2>
           <Card>
             <CardHeader>
                 <CardTitle>Overall Score</CardTitle>
-                <div className="rounded-lg bg-muted p-4 my-2">
+                <div className={cn("rounded-lg p-4 my-2 transition-colors duration-500", scoreColorClasses.bgMuted)}>
                     <div className="flex items-baseline justify-center gap-2">
-                        <span className="text-5xl font-bold tracking-tighter">{Math.round(review.overallScore * 10)}</span>
-                        <span className="text-xl text-muted-foreground">%</span>
+                        <span className={cn("text-5xl font-bold tracking-tighter transition-colors duration-500", scoreColorClasses.text)}>
+                            {Math.round(review.overallScore * 10)}
+                        </span>
+                        <span className={cn("text-xl transition-colors duration-500", scoreColorClasses.text, "opacity-70")}>%</span>
                     </div>
                 </div>
-                <Progress value={review.overallScore * 10} className="w-full" />
+                <Progress value={progressValue} indicatorClassName={scoreColorClasses.bg} />
             </CardHeader>
             <CardContent>
                 <h3 className="font-semibold mb-2">Suggestions for Improvement:</h3>
