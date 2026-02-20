@@ -8,6 +8,7 @@
     "genkit:watch": "genkit start -- tsx --watch src/ai/dev.ts",
     "build": "npx @cloudflare/next-on-pages",
     "vercel-build": "next build",
+    "deploy": "wrangler deploy",
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit"
