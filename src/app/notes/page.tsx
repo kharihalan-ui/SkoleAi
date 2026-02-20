@@ -5,7 +5,9 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';
-import { Plus, Trash, Mic, Notebook } from 'lucide-react';
+import { Plus, Trash, Sparkles, Notebook } from 'lucide-react';
+import { enhanceNote } from '@/ai/flows/note-enhancer';
+import { useToast } from '@/hooks/use-toast';
 import { format } from 'date-fns';
 
 type Note = {
@@ -23,6 +25,8 @@ export default function NotesPage() {
     content: '',
     category: '',
   });
+  const [isEnhancing, setIsEnhancing] = useState(false);
+  const { toast } = useToast();
 
   const handleSaveNote = () => {
     if (!currentNote.content) return;
@@ -39,6 +43,23 @@ export default function NotesPage() {
 
   const handleDeleteNote = (id: number) => {
     setNotes(notes.filter((note) => note.id !== id));
+  };
+
+  const handleEnhanceNote = async (type: 'summarize' | 'expand' | 'clarify' | 'addExamples') => {
+    if (!currentNote.content || currentNote.content.length < 20) {
+      toast({ title: 'Add content', description: 'Write at least 20 characters to enhance.', variant: 'destructive' });
+      return;
+    }
+    setIsEnhancing(true);
+    try {
+      const result = await enhanceNote({ noteContent: currentNote.content, enhancementType: type });
+      setCurrentNote({ ...currentNote, content: result.enhancedNote });
+      toast({ title: 'Enhanced!', description: `Notes ${type === 'summarize' ? 'summarized' : type === 'expand' ? 'expanded' : type === 'clarify' ? 'clarified' : 'updated with examples'}.` });
+    } catch (error) {
+      toast({ title: 'Error', description: 'Failed to enhance notes.', variant: 'destructive' });
+    } finally {
+      setIsEnhancing(false);
+    }
   };
   
   return (
@@ -73,12 +94,21 @@ export default function NotesPage() {
                 value={currentNote.category}
                 onChange={(e) => setCurrentNote({ ...currentNote, category: e.target.value })}
               />
-              <div className="flex justify-between items-center">
+              <div className="flex flex-wrap gap-2">
                  <Button onClick={handleSaveNote}>
                     <Plus/> Save Note
                  </Button>
-                 <Button variant="outline" disabled>
-                    <Mic/> Record
+                 <Button variant="outline" size="sm" onClick={() => handleEnhanceNote('clarify')} disabled={isEnhancing}>
+                    <Sparkles/> Clarify
+                 </Button>
+                 <Button variant="outline" size="sm" onClick={() => handleEnhanceNote('expand')} disabled={isEnhancing}>
+                    <Sparkles/> Expand
+                 </Button>
+                 <Button variant="outline" size="sm" onClick={() => handleEnhanceNote('summarize')} disabled={isEnhancing}>
+                    <Sparkles/> Summarize
+                 </Button>
+                 <Button variant="outline" size="sm" onClick={() => handleEnhanceNote('addExamples')} disabled={isEnhancing}>
+                    <Sparkles/> Add Examples
                  </Button>
               </div>
             </CardContent>

@@ -9,6 +9,10 @@ import {
   Scan,
   Bot,
   BookOpen,
+  FileText,
+  Calculator,
+  Calendar,
+  HelpCircle,
 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -26,6 +30,10 @@ const menuItems = [
   { href: '/essay-checker', label: 'Essay Checker', icon: PenSquare },
   { href: '/notes', label: 'Smart Notes', icon: Notebook },
   { href: '/flashcards', label: 'AI Flashcards', icon: GraduationCap },
+  { href: '/quiz', label: 'Quiz Generator', icon: HelpCircle },
+  { href: '/summarizer', label: 'Text Summarizer', icon: FileText },
+  { href: '/math-solver', label: 'Math Solver', icon: Calculator },
+  { href: '/study-plan', label: 'Study Plan', icon: Calendar },
   { href: '/video-notes', label: 'Video Notes', icon: Film },
   { href: '/image-analyzer', label: 'Image Analyzer', icon: Scan },
   { href: '/chat', label: 'Chat Assistant', icon: Bot },

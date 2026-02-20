@@ -5,45 +5,19 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import Link from 'next/link';
-import { ArrowRight, PenSquare, Notebook, GraduationCap, Film, Scan, Bot } from 'lucide-react';
+import { ArrowRight, PenSquare, Notebook, GraduationCap, Film, Scan, Bot, FileText, Calculator, Calendar, HelpCircle } from 'lucide-react';
 
 const features = [
-  {
-    title: 'Essay Checker',
-    description: 'Get AI-powered feedback on your writing.',
-    href: '/essay-checker',
-    icon: PenSquare,
-  },
-  {
-    title: 'Smart Notes',
-    description: 'Organize your thoughts and ideas effortlessly.',
-    href: '/notes',
-    icon: Notebook,
-  },
-  {
-    title: 'AI Flashcards',
-    description: 'Generate flashcards from your study materials.',
-    href: '/flashcards',
-    icon: GraduationCap,
-  },
-  {
-    title: 'Video Notes',
-    description: 'Summarize and transcribe educational videos.',
-    href: '/video-notes',
-    icon: Film,
-  },
-  {
-    title: 'Image Analyzer',
-    description: 'Extract text and insights from images.',
-    href: '/image-analyzer',
-    icon: Scan,
-  },
-  {
-    title: 'Chat Assistant',
-    description: 'Your personal AI tutor for any subject.',
-    href: '/chat',
-    icon: Bot,
-  },
+  { title: 'Essay Checker', description: 'Get AI-powered feedback on your writing.', href: '/essay-checker', icon: PenSquare },
+  { title: 'Smart Notes', description: 'Organize your thoughts and ideas effortlessly.', href: '/notes', icon: Notebook },
+  { title: 'AI Flashcards', description: 'Generate flashcards from your study materials.', href: '/flashcards', icon: GraduationCap },
+  { title: 'Quiz Generator', description: 'Create multiple-choice quizzes from your notes.', href: '/quiz', icon: HelpCircle },
+  { title: 'Text Summarizer', description: 'Summarize long articles and chapters instantly.', href: '/summarizer', icon: FileText },
+  { title: 'Math Solver', description: 'Step-by-step solutions for any math problem.', href: '/math-solver', icon: Calculator },
+  { title: 'Study Plan', description: 'Get a personalized day-by-day study schedule.', href: '/study-plan', icon: Calendar },
+  { title: 'Video Notes', description: 'Summarize and transcribe educational videos.', href: '/video-notes', icon: Film },
+  { title: 'Image Analyzer', description: 'Extract text and insights from images.', href: '/image-analyzer', icon: Scan },
+  { title: 'Chat Assistant', description: 'Your personal AI tutor for any subject.', href: '/chat', icon: Bot },
 ];
 
 export default function Home() {
