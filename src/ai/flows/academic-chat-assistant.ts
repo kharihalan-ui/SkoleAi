@@ -47,6 +47,9 @@ const academicChatAssistantFlow = ai.defineFlow(
   },
   async (input) => {
     const {output} = await academicChatAssistantPrompt(input);
-    return output!;
+    if (!output) {
+      throw new Error('Failed to get a response from the AI model.');
+    }
+    return output;
   }
 );

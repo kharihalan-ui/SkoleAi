@@ -48,6 +48,9 @@ const essayReviewFlow = ai.defineFlow(
   },
   async (input) => {
     const { output } = await essayReviewPrompt(input);
-    return output!;
+    if (!output) {
+      throw new Error('Failed to get a response from the AI model.');
+    }
+    return output;
   }
 );
